@@ -1,0 +1,19 @@
+.box3{
+   height: 50px; 
+   width: 50px; 
+   background-color: skyblue; 
+   color:black; 
+   border-radius: 5%; 
+   text-align: center;
+   padding-top: 15%;
+   padding-left: 15%;
+   padding-right: 15%;
+   padding-bottom: 15%;
+   border-style:solid ;
+   border-color: red;    
+}
+
+body{
+    /* background-color: yellow; */
+    background-image: url("./image.png");
+}
