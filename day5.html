@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+<style>
+    .message {
+        /* display: none; */
+        background-color: lightblue;
+        padding: 10px;
+        border: 1px solid green;
+    }
+
+    .button {
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <label for="name">name</label>
+    <input type="text" name="name" id="name" placeholder="Enter your name" />
+    <button onclick="showData()">Submit</button>
+
+    <div class="output" id="output"></div>
+    <script>
+        function showData() {
+            const name = document.getElementById("name").value;
+            const output = document.getElementById("output");
+            output.innerHTML = 'Name:' + name;
+        }
+    </script>
+
+    <!-- <button class="button" onclick="showMessage()">
+        Click me
+    </button>
+
+    <div class="message" id="message" 
+    style="display: none;">
+        You Pressed the button
+    </div>
+    <script>
+        function showMessage() {
+            document.getElementById
+                ("message").style.display = "flex";
+        }
+    </script> -->
+
+</body>
+
+</html>
