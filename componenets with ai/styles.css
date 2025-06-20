@@ -1,13 +1,25 @@
 /* Modern Design Variables */
+/* Light Theme (Default) */
 :root {
-  /* Main Colors */
+  /* Main Brand Colors - Same for both themes */
   --primary-color: #5D59AF;
   --primary-light: #7A77C7;
   --primary-dark: #413C89;
   --secondary-color: #3AAFA9;
   --accent-color: #FF6B6B;
   
-  /* Neutral Colors */
+  /* Theme Colors - Light Mode */
+  --bg-color: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --text-color: #2E3C4D;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --border-color: #E2E8F0;
+  --card-bg: #FFFFFF;
+  --footer-bg: #2E3C4D;
+  --footer-text: #FFFFFF;
+  
+  /* Neutral Colors - Referenced in Components */
   --dark: #2E3C4D;
   --dark-medium: #4A5568;
   --medium: #718096;
@@ -15,7 +27,7 @@
   --light: #E2E8F0;
   --white: #FFFFFF;
   
-  /* Gradient */
+  /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--primary-color));
   
@@ -46,6 +58,69 @@
   --container-padding: 2rem;
 }
 
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Theme Colors - Dark Mode */
+  --bg-color: #121824;
+  --bg-secondary: #1E2836;
+  --text-color: #F8FAFC;
+  --text-secondary: #E2E8F0;
+  --text-muted: #A0AEC0;
+  --border-color: #2D3748;
+  --card-bg: #1E2836;
+  --footer-bg: #0D1219;
+  --footer-text: #F8FAFC;
+  
+  /* Shadows for Dark Mode */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Additional Dark Mode Specific Styles */
+[data-theme="dark"] .contact {
+  background: linear-gradient(135deg, rgba(93, 89, 175, 0.1) 0%, rgba(58, 175, 169, 0.1) 100%);
+}
+
+[data-theme="dark"] .service-icon {
+  box-shadow: 0 5px 15px rgba(93, 89, 175, 0.3);
+}
+
+[data-theme="dark"] .contact-form input:focus,
+[data-theme="dark"] .contact-form textarea:focus {
+  border-color: var(--primary-light);
+}
+
+[data-theme="dark"] .service-card::before {
+  opacity: 0.1;
+}
+
+[data-theme="dark"] .services::before {
+  background: linear-gradient(135deg, rgba(93, 89, 175, 0.1) 0%, rgba(58, 175, 169, 0.1) 100%);
+}
+
+[data-theme="dark"] .section-header h2 {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .section-header p {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .service-card h3 {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .services {
+  background-color: var(--bg-secondary);
+}
+
+/* Fix for service card hover state in dark mode */
+[data-theme="dark"] .service-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
 /* Reset & Base Styles */
 * {
   margin: 0;
@@ -61,17 +136,19 @@ body {
   font-family: var(--body-font);
   font-size: 16px;
   line-height: 1.6;
-  color: var(--dark-medium);
-  background-color: var(--white);
+  color: var(--text-color);
+  background-color: var(--bg-color);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--dark);
+  color: var(--text-color);
   margin-bottom: 1rem;
+  transition: color 0.3s ease;
 }
 
 h1 {
@@ -185,8 +262,7 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1000;  background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
   transition: var(--transition-normal);
@@ -194,6 +270,29 @@ img {
 
 .header.scrolled {
   box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .header {
+  background-color: rgba(18, 24, 36, 0.95);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.theme-toggle:hover {
+  transform: rotate(30deg);
 }
 
 .navbar {
@@ -374,9 +473,10 @@ img {
 /* Services Section */
 .services {
   padding: 6rem 0;
-  background-color: var(--light);
+  background-color: var(--bg-secondary);
   position: relative;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .services::before {
@@ -387,6 +487,7 @@ img {
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, rgba(93, 89, 175, 0.05) 0%, rgba(58, 175, 169, 0.05) 100%);
+  transition: background 0.3s ease;
 }
 
 .services-grid {
@@ -396,7 +497,7 @@ img {
 }
 
 .service-card {
-  background-color: var(--white);
+  background-color: var(--card-bg);
   padding: 2.5rem 2rem;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -447,7 +548,7 @@ img {
 }
 
 .service-card p {
-  color: var(--medium);
+  color: var(--text-muted);
   margin-bottom: 0;
 }
 
@@ -466,9 +567,8 @@ img {
 .project-card {
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition-normal);
-  background-color: var(--white);
+  box-shadow: var(--shadow-md);  transition: var(--transition-normal);
+  background-color: var(--card-bg);
 }
 
 .project-card:hover {
@@ -646,7 +746,7 @@ img {
 }
 
 .testimonial-card {
-  background-color: var(--white);
+  background-color: var(--card-bg);
   padding: 2.5rem;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -703,6 +803,7 @@ img {
 .contact {
   padding: 6rem 0;
   background: linear-gradient(135deg, rgba(93, 89, 175, 0.05) 0%, rgba(58, 175, 169, 0.05) 100%);
+  transition: background 0.3s ease;
 }
 
 .contact-content {
@@ -737,7 +838,7 @@ img {
 }
 
 .contact-item p {
-  color: var(--medium);
+  color: var(--text-muted);
   margin-bottom: 0;
 }
 
@@ -753,7 +854,7 @@ img {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: var(--white);
+  background-color: var(--card-bg);
   color: var(--primary-color);
   border-radius: 50%;
   font-size: 1rem;
@@ -770,7 +871,7 @@ img {
 
 .contact-form-container {
   flex: 1;
-  background-color: var(--white);
+  background-color: var(--card-bg);
   padding: 2.5rem;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
@@ -790,9 +891,11 @@ img {
 .contact-form textarea {
   width: 100%;
   padding: 1rem;
-  border: 1px solid var(--light);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   font-family: var(--body-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-size: 1rem;
   transition: var(--transition-normal);
 }
@@ -806,17 +909,18 @@ img {
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(93, 89, 175, 0.1);
+  box-shadow: 0 0 0 3px rgba(93, 89, 175, 0.2);
 }
 
 /* Footer Section */
 .footer {
   padding: 6rem 0 1rem;
-  background-color: var(--dark);
-  color: var(--white);
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   position: relative;
   overflow: hidden;
   margin-top: 3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .footer-wave {

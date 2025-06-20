@@ -123,6 +123,40 @@ if (scrollToTopBtn) {
   });
 }
 
+// Theme toggler functionality
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+
+// Function to set theme
+function setTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeIcon.classList.replace('fa-sun', 'fa-moon');
+    localStorage.setItem('digistudio-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    themeIcon.classList.replace('fa-moon', 'fa-sun');
+    localStorage.setItem('digistudio-theme', 'light');
+  }
+}
+
+// Check for saved theme preference or use preferred color scheme
+const savedTheme = localStorage.getItem('digistudio-theme');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Set initial theme
+if (savedTheme) {
+  setTheme(savedTheme);
+} else if (prefersDark) {
+  setTheme('dark');
+}
+
+// Toggle theme on button click
+themeToggle.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+});
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
   // Set Home link as active by default
