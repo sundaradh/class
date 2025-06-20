@@ -99,6 +99,30 @@ if (newsletterForm) {
   });
 }
 
+// Scroll to top button functionality
+const scrollToTopBtn = document.getElementById('scrollToTop');
+if (scrollToTopBtn) {
+  // Show/hide button based on scroll position
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollToTopBtn.style.opacity = '1';
+      scrollToTopBtn.style.pointerEvents = 'auto';
+    } else {
+      scrollToTopBtn.style.opacity = '0';
+      scrollToTopBtn.style.pointerEvents = 'none';
+    }
+  });
+  
+  // Scroll to top when button is clicked
+  scrollToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
   // Set Home link as active by default
